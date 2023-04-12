@@ -1,2 +1,0 @@
-# LibRendererOpenGl
-OpenGl Renderer Library
