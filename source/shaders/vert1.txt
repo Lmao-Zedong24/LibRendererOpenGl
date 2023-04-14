@@ -1,0 +1,17 @@
+#version 330
+
+layout(location = 0) in vec3 aPos;
+layout(location = 1) in vec3 aNor;
+layout(location = 2) in vec2 aTex;
+
+out vec3 Pos;
+out vec3 Nor;
+out vec2 UV;
+
+uniform mat4 vertMat;
+
+void main()
+{
+    gl_Position = vec4(aPos, 1.0) * vertMat;
+    UV = aTex;
+}

@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="Header\Angle.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Arithmetic.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Matrix.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Matrix4Vector4Operation.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Trigonometry.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Vector.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Angle\Degree.h">
+      <Filter>Header\Angle</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Angle\Radian.h">
+      <Filter>Header\Angle</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Matrix\Matrix2.h">
+      <Filter>Header\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Matrix\Matrix3.h">
+      <Filter>Header\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Matrix\Matrix4.h">
+      <Filter>Header\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Matrix\MatrixInternal.h">
+      <Filter>Header\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Vector\Vector2.h">
+      <Filter>Header\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Vector\Vector3.h">
+      <Filter>Header\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Vector\Vector4.h">
+      <Filter>Header\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Interpolation.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Angle.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Arithmetic.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Matrix.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Trigonometry.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Vector.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header">
+      <UniqueIdentifier>{859ec8c8-0535-42e7-9cad-6bf653177aad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Angle">
+      <UniqueIdentifier>{caf1c433-58f3-488f-a000-120dd99e0009}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Matrix">
+      <UniqueIdentifier>{eb2f195f-c32e-4e99-9914-34ca898dcad5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Vector">
+      <UniqueIdentifier>{702b1e6a-ef1e-4e17-b201-42faabad763a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{7fe3b1c9-00bf-4e9e-80b8-1aa90fd546d0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
