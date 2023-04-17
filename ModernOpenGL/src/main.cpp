@@ -54,99 +54,99 @@ int main()
 	Camera cam;
 	Light lig(LibMath::Vector3(0, 0, 0));
 	ResourceManager rm;
-	rm.Add<Texture>("png-clipart-barack-obama-barack-obama.png");
-	rm.Add<Texture>("red.png");
-	rm.Add<Texture>("green.png");
-	rm.Add<Texture>("blue.png");
-	rm.Add<Texture>("white.png");
-	rm.Add<Texture>("grey.png");
-	rm.Add<Texture>("black.png");
-	rm.Add<Shader>("shaderBuffer.txt")->Link();
-	rm.Add<Model>("Sting-Sword-lowpoly.obj")->SetVAO();
-	rm.Add<Model>("cube.obj")->SetVAO();
-	rm.Add<Model>("sphere.obj")->SetVAO();
-	rm.Add<Model>("cylindre.obj")->SetVAO();
+	//rm.Add<Texture>("png-clipart-barack-obama-barack-obama.png");
+	//rm.Add<Texture>("red.png");
+	//rm.Add<Texture>("green.png");
+	//rm.Add<Texture>("blue.png");
+	//rm.Add<Texture>("white.png");
+	//rm.Add<Texture>("grey.png");
+	//rm.Add<Texture>("black.png");
+	//rm.Add<Shader>("shaderBuffer.txt")->Link();
+	//rm.Add<Model>("Sting-Sword-lowpoly.obj")->SetVAO();
+	//rm.Add<Model>("cube.obj")->SetVAO();
+	//rm.Add<Model>("sphere.obj")->SetVAO();
+	//rm.Add<Model>("cylindre.obj")->SetVAO();
 
-	auto& shader = *rm.Get<Shader>("shaderBuffer.txt");
-	auto green = rm.Get<Texture>("green.png");
-	auto red = rm.Get<Texture>("red.png");
-	auto grey = rm.Get<Texture>("grey.png");
-	auto model1 = rm.Get<Model>("Sting-Sword-lowpoly.obj");
-	auto modelCube = rm.Get<Model>("cube.obj");
+	//auto& shader = *rm.Get<Shader>("shaderBuffer.txt");
+	//auto green = rm.Get<Texture>("green.png");
+	//auto red = rm.Get<Texture>("red.png");
+	//auto grey = rm.Get<Texture>("grey.png");
+	//auto model1 = rm.Get<Model>("Sting-Sword-lowpoly.obj");
+	//auto modelCube = rm.Get<Model>("cube.obj");
 
-	cam.SetUniformCam(shader);
-	lig.SetUniformLight(shader);
+	//cam.SetUniformCam(shader);
+	//lig.SetUniformLight(shader);
 
-	// Setup Entities
-	EntityManager em;
+	//// Setup Entities
+	//EntityManager em;
 
-	GameObject* floor = em.Add<GameObject>("floor", nullptr, modelCube, grey);
-	floor->GetLocalTransform().translate(0, -1.0f, 0);
-	floor->GetLocalTransform().scale(100, 1, 100);
+	//GameObject* floor = em.Add<GameObject>("floor", nullptr, modelCube, grey);
+	//floor->GetLocalTransform().translate(0, -1.0f, 0);
+	//floor->GetLocalTransform().scale(100, 1, 100);
 
-	GameObject* cube = em.Add<GameObject>("cube", nullptr, modelCube, green);
-	GameObject* swrd = em.Add<GameObject>("swrd", nullptr, model1, green);
+	//GameObject* cube = em.Add<GameObject>("cube", nullptr, modelCube, green);
+	//GameObject* swrd = em.Add<GameObject>("swrd", nullptr, model1, green);
 
-	//auto names = std::vector<std::string>{ "sword1" , "sword2" };
-	//auto models = std::vector<Model*>{ model1 };
-	//auto textures = std::vector<Texture*>{ green };
+	////auto names = std::vector<std::string>{ "sword1" , "sword2" };
+	////auto models = std::vector<Model*>{ model1 };
+	////auto textures = std::vector<Texture*>{ green };
 
-	//cube->AddChildreen<GameObject>(names, models, textures);
-	cube->AddCapsuleChild(3, 0.5f,	rm.Get<Model>("sphere.obj"),
-									rm.Get<Model>("cylindre.obj"),
-									red);
-	swrd->AddCapsuleChild(1, 1,		rm.Get<Model>("sphere.obj"),
-									rm.Get<Model>("cylindre.obj"),
-									red);
+	////cube->AddChildreen<GameObject>(names, models, textures);
+	//cube->AddCapsuleChild(3, 0.5f,	rm.Get<Model>("sphere.obj"),
+	//								rm.Get<Model>("cylindre.obj"),
+	//								red);
+	//swrd->AddCapsuleChild(1, 1,		rm.Get<Model>("sphere.obj"),
+	//								rm.Get<Model>("cylindre.obj"),
+	//								red);
 
-	auto& cbe =		*em.Get<GameObject>("cube");
-	auto& swoard1 =		*em.Get<GameObject>("swrd");
-	auto& swr =		*em.Get<GameObject>("swrd");
-	//auto& cpsl =	*cbe.GetChild<GameObject>("capsule");
+	//auto& cbe =		*em.Get<GameObject>("cube");
+	//auto& swoard1 =		*em.Get<GameObject>("swrd");
+	//auto& swr =		*em.Get<GameObject>("swrd");
+	////auto& cpsl =	*cbe.GetChild<GameObject>("capsule");
 
-	cbe.GetLocalTransform().scale(3);
-	cbe.GetLocalTransform().translate(3, 0, -2);
+	//cbe.GetLocalTransform().scale(3);
+	//cbe.GetLocalTransform().translate(3, 0, -2);
 
-	swr.GetLocalTransform().translate(-3, 0, -2);
+	//swr.GetLocalTransform().translate(-3, 0, -2);
 
-	//Player
-	PlayerGO* player	= em.Add<PlayerGO>("player", nullptr);
-	player->GetLocalTransform().translate(0, 4, 0);
+	////Player
+	//PlayerGO* player	= em.Add<PlayerGO>("player", nullptr);
+	//player->GetLocalTransform().translate(0, 4, 0);
 
-	CameraG0* camGO		= player->GetChild<CameraG0>(PlayerGO::CameraName);
+	//CameraG0* camGO		= player->GetChild<CameraG0>(PlayerGO::CameraName);
 
-	Transform& t1 = camGO->AddChild<GameObject>("crosshair1", modelCube, red)->GetLocalTransform();
-	t1.translate(0, 0, -0.5f);
-	t1.scale(0.1f);
-	t1.scale(1.0f, 0.06f, 0.06f);
+	//Transform& t1 = camGO->AddChild<GameObject>("crosshair1", modelCube, red)->GetLocalTransform();
+	//t1.translate(0, 0, -0.5f);
+	//t1.scale(0.1f);
+	//t1.scale(1.0f, 0.06f, 0.06f);
 
-	Transform& t2 = camGO->AddChild<GameObject>("crosshair2", modelCube, red)->GetLocalTransform();
-	t2.translate(0, 0, -0.5f);
-	t2.scale(0.1f);
-	t2.scale(0.06f, 1.0f, 0.06f);
+	//Transform& t2 = camGO->AddChild<GameObject>("crosshair2", modelCube, red)->GetLocalTransform();
+	//t2.translate(0, 0, -0.5f);
+	//t2.scale(0.1f);
+	//t2.scale(0.06f, 1.0f, 0.06f);
 
-	//capGO->GetLocalTransform().scale(0.5f);
-	//capGO->GetLocalTransform().translate(0, 0, 0);
+	////capGO->GetLocalTransform().scale(0.5f);
+	////capGO->GetLocalTransform().translate(0, 0, 0);
 
-	// Run main loop
-	while (!glfwWindowShouldClose(window))
-	{
-		camGO->Update();
+	//// Run main loop
+	//while (!glfwWindowShouldClose(window))
+	//{
+	//	camGO->Update();
 
-		processInput(window);
-		player->Inputs(window);
-		player->Update();
+	//	processInput(window);
+	//	player->Inputs(window);
+	//	player->Update();
 
-		render();
+	//	render();
 
-		em.DrawAllEntities(shader, camGO->GetCamera());
+	//	em.DrawAllEntities(shader, camGO->GetCamera());
 
-		//cam.SetUniformCam(shader);
-		//model1.Draw(green, shader, cam);
+	//	//cam.SetUniformCam(shader);
+	//	//model1.Draw(green, shader, cam);
 
-		glfwSwapBuffers(window);
-		glfwPollEvents();
-	}
+	//	glfwSwapBuffers(window);
+	//	glfwPollEvents();
+	//}
 
     rm.DeleteAll();
 

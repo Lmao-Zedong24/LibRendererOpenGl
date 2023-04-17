@@ -14,8 +14,9 @@ set(GLFW_BUILD_DOCS OFF)
 
 #download Libmath
 FetchContent_Declare(
-	libMath 
-	GIT_REPOSITORY ssh://git@git.isartintra.com:2424/2022/Lib_De_Math/Robin.git #LINK OF MY LIBMATH PUT YOURS CHANGE
+	LibMath 
+	GIT_REPOSITORY https://github.com/Lmao-Zedong24/LibMath.git #LINK OF MY LIBMATH PUT YOURS CHANGE
+	GIT_TAG develop
 	GIT_SHALLOW ON
 )
 set(BUILD_UNIT_TEST OFF) #remove this
@@ -37,7 +38,7 @@ file(GLOB_RECURSE HEADER_FILES
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${HEADER_FILES} ${SOURCE_FILES})#generate tree folders
 
 #create vs project
-FetchContent_MakeAvailable(GLFW libMath)
+FetchContent_MakeAvailable(GLFW LibMath)
 set(PROJECT_NAME ModernOpenGLProject) #CHANGE
 
 add_executable(${PROJECT_NAME}) #set le nom du projet

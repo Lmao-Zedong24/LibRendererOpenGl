@@ -1,6 +1,6 @@
 #include "Model.h"
 #include "Camera.h"
-#include "LibMath/Vector.h"
+//#include "LibMath/Vector.h"
 #include <fstream>
 #include <sstream>
 #include <string>

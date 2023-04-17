@@ -4,7 +4,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <LibMath/header/Angle/Degree.h>
-#include "Rigidbody.h"
+//#include "Rigidbody.h"
 
 
 class PlayerGO : public GameObject

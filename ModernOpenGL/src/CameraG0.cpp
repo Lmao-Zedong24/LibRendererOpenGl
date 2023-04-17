@@ -1,5 +1,5 @@
 #include "CameraG0.h"
-#include "LibMath/Angle/Degree.h"
+#include "LibMath/Header/Angle/Degree.h"
 
 using namespace LibMath::Literal;
 
