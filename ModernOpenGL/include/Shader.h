@@ -19,10 +19,15 @@ public:
 
 	GLint GetUniformLocation(const std::string& p_uniformName)const;
 
+	GLuint GetAmbientIntensityLocation();
+	GLuint GetAmbientColorLocation();
+
 	GLint m_id = 0;
 private:
 	GLuint m_vertexId = 0;
 	GLuint m_fragId = 0;
+	
+	GLuint uniformAmbientIntensity, uniformAmbientColor;
 
 	const std::string ShaderPath = "source/shaders/";
 

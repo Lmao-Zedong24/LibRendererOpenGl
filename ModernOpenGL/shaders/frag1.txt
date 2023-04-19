@@ -10,7 +10,14 @@ uniform vec3 camPos;
 uniform vec3 lightPos;
 uniform vec3 lightCom;
 
+struct DirectionalLight
+{
+	vec3 color;
+	float ambientIntensity;
+};
+
 uniform sampler2D ourTexture;
+uniform DirectionalLight directionalLight;
 
 vec4 blinnPhong()
 {
@@ -44,6 +51,8 @@ vec4 blinnPhong()
 
 void main()
 {
-	FragColor = texture(ourTexture, UV);
+	vec4 ambientColor = vec4(directionalLight.color, 1.0f) * directionalLight.ambientIntensity;
+
+	FragColor = texture(ourTexture, UV) * ambientColor;
 	//FragColor = blinnPhong();
 }

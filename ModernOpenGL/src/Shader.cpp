@@ -48,6 +48,9 @@ bool Shader::SetFragmentShader(const std::string& p_filename)
 	glShaderSource(m_fragId, 1, &fragmentSource, NULL);
 	glCompileShader(m_fragId);
 
+	uniformAmbientColor = glGetUniformLocation(m_fragId, "directionalLight.color");
+	uniformAmbientIntensity = glGetUniformLocation(m_fragId, "directionalLight.ambienIntensity");
+
 	return checkValidShader(m_fragId);
 }
 
@@ -78,6 +81,16 @@ void Shader::Delete()
 GLint Shader::GetUniformLocation(const std::string& p_uniformName) const
 {
 	return glGetUniformLocation(m_id, p_uniformName.c_str());
+}
+
+GLuint Shader::GetAmbientIntensityLocation()
+{
+	return uniformAmbientIntensity;
+}
+
+GLuint Shader::GetAmbientColorLocation()
+{
+	return uniformAmbientColor;
 }
 
 bool Shader::checkValidShader(GLint p_id)

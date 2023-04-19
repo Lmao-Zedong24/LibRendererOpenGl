@@ -41,7 +41,7 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${HEADER_FILES} ${SOURCE_FIL
 FetchContent_MakeAvailable(GLFW LibMath)
 set(PROJECT_NAME ModernOpenGLProject) #CHANGE
 
-add_executable(${PROJECT_NAME}) #set le nom du projet
+#add_executable(${PROJECT_NAME}) #set le nom du projet
 #set les lib exterieur
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}\\Include)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}\\dependencies\\GLAD) #you need to create the folder
