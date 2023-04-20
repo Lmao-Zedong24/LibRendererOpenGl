@@ -47,14 +47,16 @@ set(PROJECT_NAME ModernOpenGLProject) #CHANGE
 add_library(${PROJECT_NAME} STATIC ${HEADER_FILES} ${SOURCE_FILES})
 
 include_directories(${PROJECT_INCLUDE_DIR})
+
 if(MSVC)
   target_compile_options(${PROJECT_NAME} PRIVATE /W4 /WX)
 else()
   target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wpedantic -Werror)
 endif()
+
 #add_executable(${PROJECT_NAME}) #set le nom du projet
 #set les lib exterieur
-target_include_directories(${project_name} private ${cmake_current_source_dir}\\include)
+#target_include_directories(${project_name} private ${cmake_current_source_dir}\\include)
 # target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}\\dependencies\\GLAD) #you need to create the folder
 # target_include_directories(${PROJECT_NAME} PRIVATE ${GLFW_SOURCE_DIR}\\include)
 # target_include_directories(${PROJECT_NAME} PRIVATE ${libmath_SOURCE_DIR})
