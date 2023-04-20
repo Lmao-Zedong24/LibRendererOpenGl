@@ -1,25 +1,25 @@
-#download GLFW directly online
-include(FetchContent)
-FetchContent_Declare(
-	GLFW 
-	GIT_REPOSITORY https://github.com/glfw/glfw.git
-	GIT_TAG 3.3.8
-	GIT_SHALLOW ON #.lib if OFF .dll if ON
-)
-set(BUILD_SHARED_LIBS ON) #explication on teams
-set(GLFW_INSTALL OFF)
-set(GLFW_BUILD_EXAMPLES OFF)
-set(GLFW_BUILD_TESTS OFF)
-set(GLFW_BUILD_DOCS OFF)
+# #download GLFW directly online
+# include(FetchContent)
+# FetchContent_Declare(
+	# GLFW 
+	# GIT_REPOSITORY https://github.com/glfw/glfw.git
+	# GIT_TAG 3.3.8
+	# GIT_SHALLOW ON #.lib if OFF .dll if ON
+# )
+# set(BUILD_SHARED_LIBS ON) #explication on teams
+# set(GLFW_INSTALL OFF)
+# set(GLFW_BUILD_EXAMPLES OFF)
+# set(GLFW_BUILD_TESTS OFF)
+# set(GLFW_BUILD_DOCS OFF)
 
-#download Libmath
-FetchContent_Declare(
-	LibMath 
-	GIT_REPOSITORY https://github.com/Lmao-Zedong24/LibMath.git #LINK OF MY LIBMATH PUT YOURS CHANGE
-	GIT_TAG develop
-	GIT_SHALLOW ON
-)
-set(BUILD_UNIT_TEST OFF) #remove this
+# #download Libmath
+# FetchContent_Declare(
+	# LibMath 
+	# GIT_REPOSITORY https://github.com/Lmao-Zedong24/LibMath.git #LINK OF MY LIBMATH PUT YOURS CHANGE
+	# GIT_TAG develop
+	# GIT_SHALLOW ON
+# )
+# set(BUILD_UNIT_TEST OFF) #remove this
 
 #get source files
 file(GLOB_RECURSE SOURCE_FILES 
@@ -38,7 +38,7 @@ file(GLOB_RECURSE HEADER_FILES
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${HEADER_FILES} ${SOURCE_FILES})#generate tree folders
 
 #create vs project
-FetchContent_MakeAvailable(GLFW LibMath)
+# FetchContent_MakeAvailable(GLFW LibMath)
 set(PROJECT_NAME ModernOpenGLProject) #CHANGE
 
 #add_executable(${PROJECT_NAME}) #set le nom du projet
