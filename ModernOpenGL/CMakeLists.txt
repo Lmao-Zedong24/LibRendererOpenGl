@@ -43,15 +43,15 @@ set(PROJECT_NAME ModernOpenGLProject) #CHANGE
 
 #add_executable(${PROJECT_NAME}) #set le nom du projet
 #set les lib exterieur
-target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}\\Include)
-target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}\\dependencies\\GLAD) #you need to create the folder
-target_include_directories(${PROJECT_NAME} PRIVATE ${GLFW_SOURCE_DIR}\\include)
-target_include_directories(${PROJECT_NAME} PRIVATE ${libmath_SOURCE_DIR})
-target_link_libraries(${PROJECT_NAME} PRIVATE LibMath)
-target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
+# target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}\\Include)
+# target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}\\dependencies\\GLAD) #you need to create the folder
+# target_include_directories(${PROJECT_NAME} PRIVATE ${GLFW_SOURCE_DIR}\\include)
+# target_include_directories(${PROJECT_NAME} PRIVATE ${libmath_SOURCE_DIR})
+# target_link_libraries(${PROJECT_NAME} PRIVATE LibMath)
+# target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
 
-target_sources(${PROJECT_NAME} PRIVATE ${HEADER_FILES} ${SOURCE_FILES})
-target_sources(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}\\dependencies\\GLAD\\glad\\glad.c)
+# target_sources(${PROJECT_NAME} PRIVATE ${HEADER_FILES} ${SOURCE_FILES})
+# target_sources(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}\\dependencies\\GLAD\\glad\\glad.c)
 
 #copy les dlls
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
