@@ -42,6 +42,13 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${HEADER_FILES} ${SOURCE_FIL
 set(PROJECT_NAME ModernOpenGLProject) #CHANGE
 
 add_library(${PROJECT_NAME} STATIC ${HEADER_FILES} ${SOURCE_FILES})
+
+include_directories(${PROJECT_INCLUDE_DIR})
+if(MSVC)
+  target_compile_options(${PROJECT_NAME} PRIVATE /W4 /WX)
+else()
+  target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wpedantic -Werror)
+endif()
 #add_executable(${PROJECT_NAME}) #set le nom du projet
 #set les lib exterieur
 target_include_directories(${project_name} private ${cmake_current_source_dir}\\include)
