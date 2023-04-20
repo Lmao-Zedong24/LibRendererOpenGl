@@ -22,6 +22,9 @@
 # set(BUILD_UNIT_TEST OFF) #remove this
 
 #get source files
+
+get_filename_component(CURRENT_FOLDER_NAME ${CMAKE_CURRENT_LIST_DIR} NAME)
+
 file(GLOB_RECURSE SOURCE_FILES 
 	${CMAKE_CURRENT_SOURCE_DIR}/*.c
 	${CMAKE_CURRENT_SOURCE_DIR}/*.cc # C with classe
