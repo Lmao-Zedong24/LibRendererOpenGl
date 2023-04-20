@@ -42,4 +42,4 @@ else()
   target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wpedantic -Werror)
 endif()
 
-SET(LIBRENDER_NAME ${PROJECT_NAME} PARENT_SCOPE)
+set(PROJECT_NAME ${PROJECT_NAME} PARENT_SCOPE)
