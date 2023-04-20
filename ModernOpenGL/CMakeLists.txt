@@ -24,6 +24,7 @@
 #get source files
 
 get_filename_component(CURRENT_FOLDER_NAME ${CMAKE_CURRENT_LIST_DIR} NAME)
+set(PROJECT_NAME ${CURRENT_FOLDER_NAME}) #CHANGE
 
 file(GLOB_RECURSE SOURCE_FILES 
 	${CMAKE_CURRENT_SOURCE_DIR}/*.c
@@ -42,7 +43,7 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${HEADER_FILES} ${SOURCE_FIL
 
 #create vs project
 # FetchContent_MakeAvailable(GLFW LibMath)
-set(PROJECT_NAME ModernOpenGLProject) #CHANGE
+
 
 add_library(${PROJECT_NAME} STATIC ${HEADER_FILES} ${SOURCE_FILES})
 
@@ -72,3 +73,4 @@ endif()
   # COMMAND_EXPAND_LISTS
 # )
 set(PROJECT_NAME ${PROJECT_NAME} PARENT_SCOPE) #to send the project name to the parent
+set(PROJECT_INCLUDE_DIR ${PROJECT_INCLUDE_DIR} PARENT_SCOPE)
