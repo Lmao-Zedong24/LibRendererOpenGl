@@ -22,7 +22,7 @@ FetchContent_MakeAvailable(GLFW)
 FetchContent_Declare(
 	libMath 
 	GIT_REPOSITORY https://github.com/Lmao-Zedong24/LibMath.git #LINK OF MY LIBMATH PUT YOURS CHANGE
-	GIT_TAG develop
+	GIT_TAG main
 	GIT_SHALLOW ON
 )
 set(BUILD_UNIT_TEST OFF) #remove this
