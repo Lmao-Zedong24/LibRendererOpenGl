@@ -21,7 +21,7 @@ public:
 
 	bool SetModel(const std::string& p_fileName);
 	void SetVAO();
-	void Draw(Texture& textures, Shader& shader, Camera& p_camera);
+	void Draw(Texture& textures, Shader& shader/*, Camera& p_camera*/);
 
 	void Delete()override;
 

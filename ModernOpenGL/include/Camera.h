@@ -16,7 +16,7 @@ public:
 	Camera(Mat4* p_globalMat, Mat4 p_projection);
 	~Camera() = default;
 
-	void Inputs(GLFWwindow* window);
+	//void Inputs(GLFWwindow* window);
 
 	Mat4 getViewMatrix() const;
 	Mat4 getProjectionMatrix() const;

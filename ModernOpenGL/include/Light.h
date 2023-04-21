@@ -22,7 +22,7 @@ public:
 	DirectionalLight(LibMath::Vector3 color, float aIntensity,
 		LibMath::Vector3 direction, float dIntensity);
 
-	void UseLight(float aIntensityLocation, float colorLocation, float dIntensityLocation, float directionLocation);
+	void UseLight(GLuint aIntensityLocation, GLuint colorLocation, GLuint dIntensityLocation, GLuint directionLocation);
 
 private:
 	LibMath::Vector3 direction;
@@ -36,8 +36,8 @@ public:
 			LibMath::Vector3 position, float dIntensity,
 			float constant, float linear, float exponent);
 
-	void UseLight(float aIntensityLocation, float colorLocation, float dIntensityLocation, float positionLocation,
-					float constantLocation, float linearLocation, float exponentLocation);
+	void UseLight(GLuint aIntensityLocation, GLuint colorLocation, GLuint dIntensityLocation, GLuint positionLocation,
+				GLuint constantLocation, GLuint linearLocation, GLuint exponentLocation);
 
 private:
 	LibMath::Vector3 position;

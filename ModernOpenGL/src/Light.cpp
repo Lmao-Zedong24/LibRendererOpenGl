@@ -28,7 +28,7 @@ DirectionalLight::DirectionalLight(LibMath::Vector3 color, float aIntensity,
 	this->direction = direction;
 }
 
-void DirectionalLight::UseLight(float aIntensityLocation, float colorLocation, float dIntensityLocation, float directionLocation)
+void DirectionalLight::UseLight(GLuint aIntensityLocation, GLuint colorLocation, GLuint dIntensityLocation, GLuint directionLocation)
 {
 	glUniform3f(colorLocation, color.m_x, color.m_y, color.m_x);
 	glUniform1f(aIntensityLocation, aIntensity);
@@ -57,9 +57,9 @@ PointLight::PointLight(LibMath::Vector3 color, float aIntensity,
 	this->exponent = exponent;
 }
 
-void PointLight::UseLight(float aIntensityLocation, float colorLocation,
-						float dIntensityLocation, float positionLocation,
-						float constantLocation, float linearLocation, float exponentLocation)
+void PointLight::UseLight(GLuint aIntensityLocation, GLuint colorLocation,
+						GLuint dIntensityLocation, GLuint positionLocation,
+						GLuint constantLocation, GLuint linearLocation, GLuint exponentLocation)
 {
 	glUniform3f(colorLocation, color.m_x, color.m_y, color.m_x);
 	glUniform1f(aIntensityLocation, aIntensity);
