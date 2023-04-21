@@ -1,7 +1,8 @@
 #include "Camera.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <LibMath/header/Angle/Degree.h>
+#include <LibMath/header/Angle.h>
+#include <LibMath/Header/Matrix.h>
 
 using namespace LibMath::Literal;
 
@@ -70,6 +71,11 @@ const Camera::Mat4& Camera::getViewProjMatrix()
 {
 	//UpdatemViewProjMat();
 	return m_viewProjMatrix;
+}
+
+LibMath::Vector3 Camera::GetCamPos()
+{
+	return m_camPos;
 }
 
 void Camera::Inputs(GLFWwindow* p_window)

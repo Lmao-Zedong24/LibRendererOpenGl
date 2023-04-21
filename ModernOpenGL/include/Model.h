@@ -1,6 +1,6 @@
 #pragma once
 #include "IResource.h"
-#include "ITransformable.h"
+//#include "ITransformable.h"
 #include "Camera.h"
 #include <glad/glad.h>
 #include <LibMath/header/Vector.h>
@@ -10,7 +10,7 @@
 #include <string>
 #include <vector>
 
-class Model : public IResource, public Transform
+class Model : public IResource//, public Transform
 {
 	struct Vertex;
 
@@ -31,7 +31,7 @@ private:
 	VAO m_vao;
 	//LibMath::Matrix4 m_projViewModelMat;
 
-	const std::string ModelPath = "assets/meshes/";
+	const std::string ModelPath = "../../assets/meshes/";
 
 	void InterpretFace(	std::istringstream& p_line,
 						const std::vector<LibMath::Vector3>& allPos,

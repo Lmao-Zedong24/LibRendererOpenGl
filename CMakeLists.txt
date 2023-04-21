@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.23 FATAL_ERROR)
 
 #set version c++ to 20
 set(CMAKE_CXX_STANDARD 20)

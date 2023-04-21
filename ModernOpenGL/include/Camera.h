@@ -1,9 +1,10 @@
 #pragma once
 #include "Shader.h"
 #include <LibMath/Header/Matrix.h>
-#include "ITransformable.h"
+//#include "ITransformable.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include "LibMath/Header/Vector.h"
 
 class Camera //: public Transform
 {
@@ -20,6 +21,7 @@ public:
 	Mat4 getViewMatrix() const;
 	Mat4 getProjectionMatrix() const;
 	const Mat4& getViewProjMatrix();
+	LibMath::Vector3 GetCamPos();
 
 	void setProjectionMatrix(const Mat4& p_projection);
 	void SetUniformCam(Shader& p_shader);

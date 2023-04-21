@@ -1,49 +1,91 @@
-#version 330 core
+#version 330
 
-out vec4 FragColor;
-
-in vec3 Pos;
-in vec3 Nor;
+in vec4 vectorColor;
 in vec2 UV;
+in vec3 Normal;
+in vec3 FragPos;
 
-uniform vec3 camPos;
-uniform vec3 lightPos;
-uniform vec3 lightCom;
+out vec4 color;
 
-uniform sampler2D ourTexture;
-
-vec4 blinnPhong()
+struct Light
 {
-	vec3 lightDir = normalize(lightPos - Pos);
-	float squaredDist = pow(length(lightPos - Pos),2);
+	vec3 color;
+	float aIntensity;
+	float dIntensity;
+};
 
-	float lambertian = max(dot(lightDir, Nor), 0.f);
-	float specular = 0.f;
+struct DirectionalLight
+{
+	Light base;
+	vec3 direction;
+};
 
-	if (lambertian < 0.f)
+struct PointLight
+{
+	Light base;
+	vec3 position;
+	float constant;
+	float linear;
+	float exponent;
+};
+
+struct Material
+{
+	float sIntensity;
+	float shininess;
+};
+
+uniform int pointLightCount;
+
+uniform DirectionalLight directionalLight;
+uniform PointLight pointLights[10];
+
+uniform sampler2D outTexture;
+uniform Material material;
+
+uniform vec3 camPosition;
+
+vec4 CalcLightDirection(Light baseLight, vec3 direction)
+{
+	vec4 aColor = vec4 (baseLight.color, 1.0f)* baseLight.aIntensity;
+	
+	float diffuseFactor = max(dot(normalize(Normal), normalize(direction)), 0.0f);
+	vec4 dColor = vec4 (baseLight.color, 1.0f) * baseLight.dIntensity * diffuseFactor;
+	
+	vec3 meshToCam = normalize(camPosition - FragPos);
+	vec3 reflectedVertex = normalize(reflect(direction, normalize(Normal)));
+	float specularFactor = pow(dot(meshToCam, reflectedVertex), material.shininess);
+	vec4 sColor = vec4(baseLight.color * material.sIntensity * specularFactor, 1.0f);
+	
+	return (aColor + dColor + sColor);
+}
+
+vec4 CalcDirectionalLight()
+{
+	return CalcLightDirection(directionalLight.base, directionalLight.direction);
+}
+
+vec4 CalcPointLight()
+{
+	vec4 totalColor = vec4 (0,0,0,0);
+	
+	for(int i = 0; i <pointLightCount; i++)
 	{
-		vec3 viewDir = normalize(camPos - Pos);
-		vec3 halfDir = normalize(lightDir + viewDir);
-		float specularAngle = max(dot(halfDir, Nor), 0.f);
-
-		specular = pow(specularAngle, 10);
+		vec3 direction = FragPos - pointLights[i].position;
+		float distance = length(direction);
+		direction = normalize(direction);
+		
+		vec4 color = CalcLightDirection(pointLights[i].base, direction);
+		float attenuation = pointLights[i].exponent * distance * distance + pointLights[i].linear * distance
+						+ pointLights[i].constant;
+						
+		totalColor += (color/attenuation);
 	}
-
-	vec4 colorT = texture(ourTexture, UV);
-
-	vec4 ambientColor = colorT * lightCom.x;
-	vec4 diffuseColor = colorT * lightCom.y;
-	vec4 specularColor = colorT * lightCom.z;
-
-	vec4 color = ambientColor
-		+ diffuseColor * lambertian * 1 / squaredDist
-		+ specularColor * specular * 1 / squaredDist;
-
-	return color;
+	return totalColor;
 }
 
 void main()
 {
-	FragColor = texture(ourTexture, UV);
-	//FragColor = blinnPhong();
+	vec4 finalColor = CalcDirectionalLight();
+	color = texture(outTexture, UV) * finalColor;
 }

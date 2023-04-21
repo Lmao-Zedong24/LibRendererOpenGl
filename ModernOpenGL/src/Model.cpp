@@ -1,13 +1,14 @@
 #include "Model.h"
 #include "Camera.h"
-#include "LibMath/Vector.h"
+//#include "LibMath/Vector.h"
 #include <fstream>
 #include <sstream>
 #include <string>
 #include "VBO.h"
 #include "EBO.h"
+#include "Texture.h"
 
-Model::Model(const std::string& p_fileName) : Transform(LibMath::Matrix4(1))
+Model::Model(const std::string& p_fileName) //: Transform(LibMath::Matrix4(1))
 {
     SetModel(p_fileName);
 }
@@ -151,7 +152,7 @@ void Model::Draw(Texture& p_texture, Shader& p_shader, Camera& p_camera)
 {
 	p_shader.Activate();
 	m_vao.Bind();
-	p_texture.Bind();
+	//p_texture.Bind();
 
 	
 	glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(m_indices.size()), GL_UNSIGNED_INT, 0);

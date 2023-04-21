@@ -3,9 +3,12 @@
 #include "stb_image.h"
 
 
-Texture::Texture(const std::string& p_fileName)
+Texture::Texture(const std::string& p_fileName, float specularIntensity, float shininess)
 {
     SetTexture(p_fileName);
+
+    this->specularIntensity = specularIntensity;
+    this->shininess = shininess;
 }
 
 bool Texture::SetTexture(const std::string& p_fileName)
@@ -49,4 +52,10 @@ void Texture::Unbind()
 void Texture::Delete()
 {
     glDeleteTextures(1, &m_id);
+}
+
+void Texture::UseText(int specularIntensityLocation, int shininessLocation)
+{
+    glUniform1f(specularIntensityLocation, specularIntensity);
+    glUniform1f(shininessLocation, shininess);
 }
