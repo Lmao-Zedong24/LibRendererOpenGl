@@ -10,7 +10,14 @@ class IResource
 {
 public:
 	virtual void Delete() {}
+
+	// TODO : Update IResource
+
+	//virtual void SetFilePath();
+	//virtual void GetFilePath();
+	//virtual void ReadFile(const std::string& p_fileName, const std::string& p_resourcePath);
+
 protected:
-	std::string ReadFile(const std::string& p_fileName, const std::string& p_resourcePath = "");
+	std::string WriteFileInString(const std::string& p_fileName, const std::string& p_resourcePath = "");
 };
 

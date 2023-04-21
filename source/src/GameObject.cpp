@@ -1,5 +1,7 @@
 #include "GameObject.h"
-#include "EmptyGM.h"
+#include "EmptyGO.h"
+#include "AllGO.h"
+#include "PFA/PFAGM.h"
 
 
 std::vector<std::string> GameObject::LayerNames = { "default" };
@@ -29,17 +31,42 @@ void GameObject::SetupEntity(Model* p_model, Texture* p_texture)
 	m_texture = p_texture;
 }
 
+void GameObject::SetModel(Model* p_model)
+{
+	m_model = p_model;
+}
+
+void GameObject::SetTexture(Texture* p_texture)
+{
+	m_texture = p_texture;
+}
+
+void GameObject::SetLayer(Layer p_layer)
+{
+	m_layer = p_layer;
+}
+
 //const std::string& GameObject::GetName()
 //{
 //	return m_name;
 //}
+
+GameObject::Layer GameObject::GetLayer() const
+{
+	return m_layer;
+}
 
 Transform& GameObject::GetLocalTransform()
 {
 	return m_localTransform;
 }
 
-const LibMath::Matrix4& GameObject::GetGlobalMat()
+const Transform& GameObject::GetLocalTransform() const
+{
+	return m_localTransform;
+}
+
+const LibMath::Matrix4& GameObject::GetGlobalMat()const
 {
 	return m_globalMat;
 }
@@ -60,14 +87,13 @@ void GameObject::DrawNodes(Shader& p_shader, Camera& p_camera)
 	//	return;
 
 	//this->UpdateGlobalMat();
-	this->UpdateGlobalMat();
+	//this->UpdateGlobalMat();
 
-	if (m_texture)
+	if (m_model && m_texture)
 	{
 		this->SetUniform(p_shader, p_camera);
 		m_model->Draw(*m_texture, p_shader, p_camera);
 	}
-
 
 	for (auto& child : m_children)
 		child.second->DrawNodes(p_shader, p_camera); //recursive with all childreen ? 
@@ -111,7 +137,73 @@ EmptyGO* GameObject::AddCapsuleChild(float p_height, float p_radius, Model* p_sp
 	return capasule;
 }
 
-GameObject::Layer GameObject::GetLayer(const std::string& p_name)
+bool GameObject::HasColor() const
+{
+	return m_color != Color::DEFAULT;
+}
+
+GameObject::Color GameObject::GetColor() const
+{
+	return m_color;
+}
+
+bool GameObject::IsSameColor(const Color& p_color)const
+{
+	return m_color == p_color;
+}
+
+void GameObject::SwitchColorTexture(const Color& p_color)
+{
+	if (m_color == Color::DEFAULT)
+		return;
+
+	m_color = p_color;
+	this->SetTexture(GameObject::GetTextureColor(p_color));
+}
+
+
+void GameObject::SetColor(e_colors p_color)
+{
+	m_color = p_color;
+}
+
+Texture* GameObject::GetTextureColor(e_colors p_color)
+{
+	auto& rm = PFA::PFAGM::GetInstance()->GetRM();
+	std::string texName;
+
+	switch (p_color)
+	{
+	case GameObject::e_colors::RED:
+		texName = "red.png";
+		break;
+
+	case GameObject::e_colors::GREEN:
+		texName = "green.png";
+		break;
+
+	case GameObject::e_colors::BLUE:
+		texName = "blue.png";
+		break;
+
+	case GameObject::e_colors::DEFAULT:
+	default:
+		return nullptr;
+		break;
+	}
+
+	return rm.Get<Texture>(texName);
+}
+
+void GameObject::Update()
+{
+	this->UpdateGlobalMat();
+
+	for (auto& child : m_children)
+		child.second->Update(); 
+}
+
+GameObject::Layer GameObject::FetchLayer(const std::string& p_name)
 {
 	for (size_t i = 0; i < LayerNames.size(); i++)
 	{

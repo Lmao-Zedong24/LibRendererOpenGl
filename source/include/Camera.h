@@ -12,10 +12,10 @@ class Camera //: public Transform
 public:
 	Camera();
 	Camera(const Mat4& p_transform, Mat4 p_projection);
-	Camera(Mat4* p_globalMat, Mat4 p_projection);
+	Camera(Mat4& p_globalMat, Mat4 p_projection);
 	~Camera() = default;
 
-	void Inputs(GLFWwindow* window);
+	void Inputs(GLFWwindow* m_window);
 
 	Mat4 getViewMatrix() const;
 	Mat4 getProjectionMatrix() const;
@@ -36,5 +36,7 @@ private:
 
 	LibMath::Vector3	m_camPos;
 	const float Speed = 0.1f;
+
+	static inline std::vector<Mat4> m_UnlinkedCameraGlobalMat;
 };
 

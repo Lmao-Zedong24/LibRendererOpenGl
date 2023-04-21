@@ -1,20 +1,22 @@
 #pragma once
 #include "GameObject.h"
 #include "Camera.h"
+#include <memory>
 
-class CameraG0 : public GameObject
+class CameraGO : public GameObject
 {
 public:
-	CameraG0(GameObject*, Model*, Texture*) = delete;
-	void SetupEntity(Model* p_model, Texture* p_texture) = delete;
+	//CameraGO(GameObject*, Model*, Texture*) = delete;
+	//void SetupEntity(Model* p_model, Texture* p_texture) = delete;
 
-	CameraG0(GameObject* p_parent);
-	CameraG0(GameObject* p_parent, const LibMath::Matrix4& p_projection);
+	CameraGO(GameObject* p_parent);
+	CameraGO(GameObject* p_parent, const LibMath::Matrix4& p_projection);
 
 	Camera& GetCamera();
-	void Update();
+	void Update() override;
+	void UpdateMats();
 
 private:
-	Camera* m_cam;
+	Camera m_currentCam;
 };
 

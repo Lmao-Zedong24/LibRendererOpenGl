@@ -21,6 +21,11 @@ Transform::Transform(Mat4 p_transform)
 		m_transform = p_transform;
 	}
 
+	void Transform::multiplyTransform(const Mat4& p_transform)
+	{
+		this->m_transform *= p_transform;
+	}
+
 	Transform& Transform::translate(const float p_x, const float p_y, const float p_z)
 	{
 		this->m_transform *= Mat4::translation(p_x, p_y, p_z);

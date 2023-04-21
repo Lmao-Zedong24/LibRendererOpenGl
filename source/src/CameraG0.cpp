@@ -3,26 +3,35 @@
 
 using namespace LibMath::Literal;
 
-CameraG0::CameraG0(GameObject* p_parent) :
+CameraGO::CameraGO(GameObject* p_parent) :
 	GameObject(p_parent), 
-	m_cam( new Camera(&this->m_globalMat, LibMath::Matrix4::perspectiveProjection(
+	m_currentCam( Camera(this->m_globalMat, LibMath::Matrix4::perspectiveProjection(
 		120_deg, 16.f / 9.f, .1f, 200.f)))
-{	
+{
 }
 
-CameraG0::CameraG0(GameObject* p_parent, const LibMath::Matrix4& p_projection) :
+CameraGO::CameraGO(GameObject* p_parent, const LibMath::Matrix4& p_projection) :
 	GameObject(p_parent), 
-	m_cam( new Camera(&this->m_globalMat, p_projection))
+	m_currentCam( Camera(this->m_globalMat, p_projection))
 {
 }
-Camera& CameraG0::GetCamera()
+Camera& CameraGO::GetCamera()
 {
-	return *m_cam;
+	return m_currentCam;
 }
 
-void CameraG0::Update()
+void CameraGO::UpdateMats()
 {
-	m_cam->UpdateViewMat();
-	m_cam->UpdatemViewProjMat();
+	this->UpdateGlobalMat();
+	m_currentCam.UpdateViewMat();
+	m_currentCam.UpdatemViewProjMat();
+}
+
+void CameraGO::Update()
+{
+	this->UpdateMats();
+
+	for (auto& child : m_children)
+		child.second->Update();
 }
 

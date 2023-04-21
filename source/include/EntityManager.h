@@ -20,7 +20,6 @@ public:
 		if (this->m_entities.count(p_name) != 0)
 			return nullptr;
 
-		//auto tmpStr = p_entity->GetName();
 		this->m_entities.insert({ p_name, std::make_unique<T>(p_parent)});
 
 		return static_cast<T*>(m_entities.at(p_name).get());
@@ -46,6 +45,8 @@ public:
 
 		return nullptr;
 	};
+
+	void Update();
 
 	void DrawAllEntities(Shader& p_shader, Camera& p_camera);
 

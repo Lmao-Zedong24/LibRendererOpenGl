@@ -23,6 +23,7 @@ void Model::InterpretFace(	std::istringstream& p_line,
 	std::vector<int> triangleIndex;
 	triangleIndex.reserve(4);
 
+	int i = 0;
 	while (p_line >> strVertex) //for each vertex in p_line
 	{
 		std::replace(strVertex.begin(), strVertex.end(), '/', ' ');
@@ -53,6 +54,10 @@ void Model::InterpretFace(	std::istringstream& p_line,
 		}
 
 		triangleIndex.push_back(vertexIndex); //add triangleIndex
+		i++;
+
+		if (i >= 20)
+			bool b = false;
 	}
 
 	if (triangleIndex.size() >= 3) //123
@@ -71,7 +76,7 @@ void Model::InterpretFace(	std::istringstream& p_line,
 
 bool Model::SetModel(const std::string& p_fileName)
 {
-	const float SCALE = 0.5f; // TODO : remove scale in SetModel
+	const float SCALE = 0.5f; // TODO : scale fits
 
 	std::ifstream file;
 	file.open(ModelPath + p_fileName);
@@ -93,19 +98,20 @@ bool Model::SetModel(const std::string& p_fileName)
 		std::istringstream issLine(line);
 		issLine >> charac;
 
-		//if (charac == "o")
-		//{
-		//	offset += LibMath::Vector3(	static_cast<float>(allPos.size() - 1),
-		//								static_cast<float>(allNor.size() - 1), 
-		//								static_cast<float>(allUv.size()) - 1);	//increment offset
-		//	allPos.clear(); 														// reset arrays
-		//	allNor.clear();
-		//	allUv.clear();
-		//}
+		if (charac == "o")
+		{
+			offset += LibMath::Vector3(	static_cast<float>(allPos.size()),
+										static_cast<float>(allNor.size()), 
+										static_cast<float>(allUv.size()));	//increment offset
+			allPos.clear(); 												// reset arrays
+			allNor.clear();
+			allUv.clear();
+		}
 		if (charac == "v")
 		{
 			issLine >> f1; issLine >> f2; issLine >> f3;
 			allPos.push_back(LibMath::Vector3(f1 * SCALE, f2 * SCALE, f3 * SCALE));
+			//allPos.push_back(LibMath::Vector3(f1, f2, f3));
 		}
 		else if (charac == "vt")
 		{

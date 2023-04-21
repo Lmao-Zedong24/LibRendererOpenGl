@@ -159,12 +159,19 @@ public:
 #pragma endregion
 
 #pragma region Transformations
+
 	/// <summary>
 	/// Replaces transform Mat4
 	/// </summary>
 	/// <param name="p_transform">: Copy Mat4</param>
 	/// <returns></returns>
 	void	setTransform(const Mat4& p_transform);
+
+	/// <summary>
+	/// Multiplies transform Mat4
+	/// </summary>
+	/// <param name="p_transform"></param> Matrix multiplication Mat4
+	void multiplyTransform(const Mat4& p_transform);
 
 	/// <summary>
 	/// Translate position by parameters

@@ -21,6 +21,12 @@
 //		m_resources.erase(p_name);
 //}
 
+void EntityManager::Update()
+{
+	for (auto& pair : m_entities)
+		pair.second->Update();
+}
+
 void EntityManager::DrawAllEntities(Shader& p_shader, Camera& p_camera)
 {
 	for (auto& pair : m_entities)

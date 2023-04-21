@@ -10,21 +10,64 @@ class EmptyGO;
 
 class GameObject
 {
-	using Childreen = std::unordered_map<std::string, std::unique_ptr<GameObject>>;
-	using Layer		= size_t;
-
 public:
+	struct Layer
+	{
+		size_t val;
+
+		Layer() : Layer(0) {};
+		Layer(size_t i) : 
+			val(i) {};
+
+		bool operator==(Layer p_l) { return val == p_l.val; };
+
+		bool IsName(const std::string& p_name)
+		{
+			return val == FetchLayer(p_name).val;
+		};
+	};
+	static enum class e_colors
+	{
+		DEFAULT,
+		RED,
+		GREEN,
+		BLUE
+	};
+
+	using Childreen = std::unordered_map<std::string, std::unique_ptr<GameObject>>;
+	using Color		= e_colors; // TODO : use colors
+
+
 	GameObject(GameObject* p_parent);
 	GameObject(GameObject* p_parent, Model* p_model, Texture* p_texture);
 	~GameObject() = default;
 
-	void						SetupEntity(Model* p_model, Texture* p_texture);
+	static Layer				FetchLayer(const std::string& p_name);
 
-	//const std::string&			GetName();
+	void						SetupEntity(Model* p_model, Texture* p_texture);
+	void						SetModel(Model* p_model);
+	void						SetTexture(Texture* p_texture);
+	void						SetLayer(Layer);
+
+	Layer						GetLayer()const;
 	Transform&					GetLocalTransform();
-	const LibMath::Matrix4&		GetGlobalMat();
+	const Transform&			GetLocalTransform()const;
+	const LibMath::Matrix4&		GetGlobalMat()const;
 	GameObject*					GetParent();
 	Childreen&					GetChildreen();
+
+	virtual void				Update();
+	void						DrawNodes(Shader& p_shader, Camera& p_camera);
+	void						SetUniform(Shader& p_shader, Camera& p_camera);
+	void						UpdateGlobalMat();
+	EmptyGO*					AddCapsuleChild(float p_height, float p_radius, Model* p_sphereModel, 
+												Model* p_cylindreModel, Texture* p_texture);
+
+	bool						HasColor()const;
+	void						SetColor(e_colors p_color);
+	Color						GetColor()const;
+	bool						IsSameColor(const Color& p_color)const;
+	void						SwitchColorTexture(const Color& p_color);
 
 	template <typename T>
 	T* GetChild(const std::string& p_name)
@@ -39,10 +82,6 @@ public:
 		return nullptr;
 	};
 
-	void						DrawNodes(Shader& p_shader, Camera& p_camera);
-	void						SetUniform(Shader& p_shader, Camera& p_camera);
-	void						UpdateGlobalMat();
-
 	template <typename T>
 	T* AddChild(const std::string& p_name)
 	{
@@ -54,7 +93,7 @@ public:
 		//childPtr->m_parent = this;
 
 		return childPtr;
-	};
+	}
 
 	template <typename T>
 	T* AddChild(const std::string& p_name, Model* p_model, Texture* p_texture)
@@ -72,7 +111,7 @@ public:
 	};
 
 	template <typename T>
-	void AddChildreen(	std::vector<std::string>& p_names, 
+	void AddChildreen(	std::vector<std::string>& p_names,
 						std::vector<Model*>& p_models, std::vector<Texture*>& p_textures)
 	{
 		if (!(std::is_same_v<GameObject, T> || std::is_base_of_v<GameObject, T>))
@@ -94,20 +133,12 @@ public:
 			if (!(p_models[mIndex] == nullptr || p_textures[tIndex] == nullptr))
 				childPtr->SetupEntity(p_models[mIndex], p_textures[tIndex]);
 
-			mIndex += mIndex < p_models.size() - 1	?	1 : 0; //increment if not at end of array
-			tIndex += tIndex < p_textures.size() - 1 ?	1 : 0;
+			mIndex += mIndex < p_models.size() - 1 ? 1 : 0; //increment if not at end of array
+			tIndex += tIndex < p_textures.size() - 1 ? 1 : 0;
 		}
 	};
 
-	EmptyGO* AddCapsuleChild(float p_height, float p_radius, Model* p_sphereModel, Model* p_cylindreModel, Texture* p_texture);
-
-
-	virtual void Update() {};
-
-	static Layer GetLayer(const std::string& p_name);
-
 protected:
-	//std::string					m_name;
 	static std::vector<std::string>		LayerNames;
 
 	Model* 						m_model;
@@ -116,9 +147,14 @@ protected:
 	GameObject*					m_parent;
 	Childreen					m_children;
 	Layer						m_layer;
+	Color						m_color;
 
 	Transform					m_localTransform;
 	LibMath::Matrix4			m_globalMat;
-	LibMath::Matrix4			m_projViewModelMat;
+	LibMath::Matrix4			m_projViewModelMat; 
+
+	static Texture* GetTextureColor(e_colors p_color);
 };
+
+
 

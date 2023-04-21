@@ -4460,7 +4460,7 @@ static int stbi__parse_zlib_header(stbi__zbuf* a)
     if ((cmf * 256 + flg) % 31 != 0) return stbi__err("bad zlib header", "Corrupt PNG"); // zlib spec
     if (flg & 32) return stbi__err("no preset dict", "Corrupt PNG"); // preset dictionary not allowed in png
     if (cm != 8) return stbi__err("bad compression", "Corrupt PNG"); // DEFLATE required for png
-    // window = 1 << (8 + cinfo)... but who cares, we fully buffer output
+    // m_window = 1 << (8 + cinfo)... but who cares, we fully buffer output
     return 1;
 }
 
@@ -4619,7 +4619,7 @@ STBIDEF int stbi_zlib_decode_noheader_buffer(char* obuffer, int olen, const char
 //      - no CRC checking
 //      - allocates lots of intermediate memory
 //        - avoids problem of streaming data between subsystems
-//        - avoids explicit window management
+//        - avoids explicit m_window management
 //    performance
 //      - uses stb_zlib, a PD zlib implementation with fast huffman decoding
 

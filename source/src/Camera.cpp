@@ -7,26 +7,28 @@ using namespace LibMath::Literal;
 
 
 Camera::Camera() :
-	m_globalMat(new LibMath::Matrix4(1)),
 	m_projectionMatrix(Mat4::perspectiveProjection(
 		120_deg, 16.f / 9.f, .01f, 200.f))
 {
+	m_UnlinkedCameraGlobalMat.push_back(LibMath::Matrix4(1));
+	m_globalMat = &m_UnlinkedCameraGlobalMat.back();
+
 	m_viewMatrix = this->getViewMatrix();
 	UpdatemViewProjMat();
 }
 
-Camera::Camera(const Mat4& p_transform, Mat4 p_projection)
+Camera::Camera(Mat4& p_transform, Mat4 p_projection)
 	: //Transform(p_transform), 
-	m_globalMat(new LibMath::Matrix4(p_transform)),
+	m_globalMat(&p_transform),
 	m_projectionMatrix(std::move(p_projection))
 {
 }
 
-Camera::Camera(Mat4* p_globalMat, Mat4 p_projection) :
-	m_globalMat(p_globalMat),
-	m_projectionMatrix(std::move(p_projection))
-{
-}
+//Camera::Camera(Mat4* p_globalMat, Mat4 p_projection) :
+//	m_globalMat(p_globalMat),
+//	m_projectionMatrix(std::move(p_projection))
+//{
+//}
 
 Camera::Mat4 Camera::getProjectionMatrix() const
 {

@@ -26,7 +26,7 @@ public:
 	};
 
 	template <typename T>
-	T* Get(const std::string& p_fileName)
+	T* Get(const std::string& p_fileName) const
 	{
 		if (this->m_resources.count(p_fileName) != 0)
 			return static_cast<T*>(this->m_resources.at(p_fileName).get());
