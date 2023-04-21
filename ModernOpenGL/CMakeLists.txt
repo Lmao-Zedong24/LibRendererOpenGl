@@ -19,7 +19,7 @@ file(GLOB_RECURSE SOURCE_FILES
 	${CMAKE_CURRENT_SOURCE_DIR}/*.c++)
 	
 # Add header files
-set(PROJECT_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Header)
+set(PROJECT_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 file(GLOB_RECURSE HEADER_FILES 
 	${CMAKE_CURRENT_SOURCE_DIR}/*.h
 	${CMAKE_CURRENT_SOURCE_DIR}/*.hpp
@@ -27,7 +27,7 @@ file(GLOB_RECURSE HEADER_FILES
 
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${HEADER_FILES} ${SOURCE_FILES})
 
-
+message (${CMAKE_CURRENT_SOURCE_DIR})
 ###############################
 #                             #
 # Executable                  #
